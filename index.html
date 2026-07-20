@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Content Library</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --surface: #ffffff;
+    --border: #e4e2dd;
+    --text: #1c1b19;
+    --text-muted: #6b6862;
+    --accent: #2f5d50;
+    --accent-hover: #24473d;
+    --radius: 8px;
+    --max-width: 1120px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  a { color: inherit; }
+
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: var(--accent);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    z-index: 100;
+  }
+  .skip-link:focus { left: 0.5rem; top: 0.5rem; }
+
+  header.site-header {
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .site-header-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .site-name {
+    font-weight: 700;
+    font-size: 1.15rem;
+    text-decoration: none;
+  }
+
+  nav.primary-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  nav.primary-nav a {
+    text-decoration: none;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+  }
+  nav.primary-nav a[aria-current="page"],
+  nav.primary-nav a:hover {
+    color: var(--text);
+  }
+
+  main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  h1.page-title {
+    font-size: 1.9rem;
+    margin: 0 0 1.5rem;
+  }
+
+  /* Filters */
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem 2rem;
+    align-items: flex-end;
+    padding: 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 2rem;
+  }
+
+  fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  legend, .field-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    padding: 0;
+  }
+
+  .radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .radio-group label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.4rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 0.875rem;
+    cursor: pointer;
+  }
+
+  .radio-group input:checked + span,
+  .radio-group label:has(input:checked) {
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+  }
+
+  select {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+    background: var(--surface);
+    min-width: 220px;
+  }
+
+  .filters button {
+    padding: 0.55rem 1.25rem;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  .filters button:hover { background: var(--accent-hover); }
+
+  /* Card grid */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-media {
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(135deg, var(--accent) 0%, #4d8577 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.85);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .card-body {
+    padding: 1rem 1.1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+  }
+
+  .card-type {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .card-title {
+    font-size: 1.05rem;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .card-title a {
+    text-decoration: none;
+  }
+  .card-title a:hover { text-decoration: underline; }
+
+  .card-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin: 0;
+    flex: 1;
+  }
+
+  /* Pagination */
+  nav.pagination {
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  nav.pagination ul {
+    list-style: none;
+    display: flex;
+    gap: 0.35rem;
+    padding: 0;
+    margin: 0;
+  }
+
+  nav.pagination a,
+  nav.pagination span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.25rem;
+    height: 2.25rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-size: 0.9rem;
+    border: 1px solid transparent;
+  }
+
+  nav.pagination a { color: var(--text-muted); }
+  nav.pagination a:hover { border-color: var(--border); }
+  nav.pagination [aria-current="page"] {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  footer.site-footer {
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    margin-top: 3rem;
+  }
+
+  .site-footer-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+
+  @media (max-width: 600px) {
+    .filters { flex-direction: column; align-items: stretch; }
+    select { min-width: 0; width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="site-name" href="/">Content Library</a>
+    <nav class="primary-nav" aria-label="Main">
+      <ul>
+        <li><a href="#" aria-current="page">Browse All</a></li>
+        <li><a href="#">Programs</a></li>
+        <li><a href="#">Articles</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content">
+  <h1 class="page-title">Content Library</h1>
+
+  <form class="filters" method="get" action="#">
+    <fieldset>
+      <legend>Category</legend>
+      <div class="radio-group">
+        <label><input type="radio" name="category" value="all" checked> Show All</label>
+        <label><input type="radio" name="category" value="article"> Article</label>
+        <label><input type="radio" name="category" value="ebook"> eBook</label>
+        <label><input type="radio" name="category" value="video"> Video</label>
+        <label><input type="radio" name="category" value="webinar"> Webinar</label>
+      </div>
+    </fieldset>
+
+    <div>
+      <label class="field-label" for="topic">Topic</label>
+      <select id="topic" name="topic">
+        <option value="all" selected>All topics</option>
+        <option value="ai">Artificial Intelligence</option>
+        <option value="cs">Computer Science &amp; Security</option>
+        <option value="energy">Energy &amp; Sustainability</option>
+        <option value="health">Health &amp; Medicine</option>
+        <option value="innovation">Innovation &amp; Entrepreneurship</option>
+        <option value="leadership">Leadership &amp; Business</option>
+      </select>
+    </div>
+
+    <button type="submit">Apply</button>
+  </form>
+
+  <section aria-label="Results">
+    <ul class="card-grid" style="list-style:none; padding:0; margin:0;">
+
+      <li class="card">
+        <div class="card-media" aria-hidden="true">Video</div>
+        <div class="card-body">
+          <span class="card-type">Video</span>
+          <h3 class="card-title"><a href="#">Graduate Course Lectures</a></h3>
+          <p class="card-desc">Full-length recorded lecture series, viewable on demand.</p>
+        </div>
+      </li>
+
+      <li class="card">
+        <div class="card-media" aria-hidden="true">Video</div>
+        <div class="card-body">
+          <span class="card-type">Video</span>
+          <h3 class="card-title"><a href="#">Panel Discussion Series</a></h3>
+          <p class="card-desc">Roundtable conversations with practitioners on applied topics.</p>
+        </div>
+      </li>
+
+      <li class="card">
+        <div class="card-media" aria-hidden="true">Article</div>
+        <div class="card-body">
+          <span class="card-type">Article</span>
+          <h3 class="card-title"><a href="#">Building Durable Skills</a></h3>
+          <p class="card-desc">A short read on skills that hold up across career changes.</p>
+        </div>
+      </li>
+
+      <li class="card">
+        <div class="card-media" aria-hidden="true">Webinar</div>
+        <div class="card-body">
+          <span class="card-type">Webinar</span>
+          <h3 class="card-title"><a href="#">Applied AI in Practice</a></h3>
+          <p class="card-desc">Practitioners discuss moving from prototype to production.</p>
+        </div>
+      </li>
+
+      <li class="card">
+        <div class="card-media" aria-hidden="true">Webinar</div>
+        <div class="card-body">
+          <span class="card-type">Webinar</span>
+          <h3 class="card-title"><a href="#">Negotiation Fundamentals</a></h3>
+          <p class="card-desc">Practical techniques for workplace negotiation.</p>
+        </div>
+      </li>
+
+      <li class="card">
+        <div class="card-media" aria-hidden="true">Article</div>
+        <div class="card-body">
+          <span class="card-type">Article</span>
+          <h3 class="card-title"><a href="#">Credentials That Stack</a></h3>
+          <p class="card-desc">How incremental certificates combine into larger credentials.</p>
+        </div>
+      </li>
+
+    </ul>
+
+    <nav class="pagination" aria-label="Pagination">
+      <ul>
+        <li><span aria-current="page">1</span></li>
+        <li><a href="?page=2">2</a></li>
+        <li><a href="?page=3">3</a></li>
+        <li><a href="?page=4">4</a></li>
+        <li><a href="?page=2" rel="next">Next</a></li>
+      </ul>
+    </nav>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <p>&copy; 2026 Content Library.</p>
+    <p><a href="#">Terms</a> &middot; <a href="#">Privacy</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
